@@ -10,7 +10,7 @@ class MoviesController < ApplicationController
 
   def create
     @movie = Movie.new(movie_params)
-    @movie.poster_url = movie_poster(@movie.title)
+    @movie.poster_url = get_movie_poster(@movie.title)
 
     @movie.save
     render json: @movie
@@ -20,7 +20,7 @@ class MoviesController < ApplicationController
     @movie = Movie.find_by(title: title)
   end
 
-  def movie_poster(title)
+  def get_movie_poster(title)
     format_title = title.gsub(" ", "%20")
     poster = JSON(HTTParty.get('http://www.omdbapi.com/?t=' + format_title))
     return poster["Poster"]
