@@ -17,15 +17,13 @@ var MovieView = Backbone.View.extend({
 
   render: function() {
     var template = $("script.template").html();
-    console.log(template);
     var rendered = _.template(template, { movie: this.model });
     this.$el.html(rendered);
-    console.log(rendered);
   }
 });
 
 var MovieList = Backbone.View.extend({
-  el: "ul",
+  el: "ul.individual-movies",
 
   initialize: function() {
     this.listenTo(this.collection, "add", this.addOne);
